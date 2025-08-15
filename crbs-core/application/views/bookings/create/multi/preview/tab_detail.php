@@ -2,6 +2,7 @@
 
 use app\components\Calendar;
 
+
 // Day name for the slot
 $day_name = Calendar::get_day_name($slot->datetime->format('N'));
 

@@ -46,9 +46,6 @@ class Departments extends MY_Controller
 	}
 
 
-
-
-
 	/**
 	 * Add a new department
 	 *
@@ -62,8 +59,6 @@ class Departments extends MY_Controller
 
 		return $this->render();
 	}
-
-
 
 
 	/**

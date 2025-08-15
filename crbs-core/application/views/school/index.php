@@ -1,29 +1,39 @@
 <?php
 echo $this->session->flashdata('saved');
-echo form_open_multipart(current_url(), array('id'=>'schooldetails', 'class'=>'cssform'));
+echo form_open_multipart(current_url(), array(
+	'id' => 'schooldetails',
+	'style' => 'margin: auto; background-color: #ffffff; border-radius: 8px;'
+	)
+);
 ?>
 
+<!-- Title -->
+<div style="margin: 15px 0 30px 0;">
+	<p style="font-size: 14px; color: #757575;">View 📖</p>
+    <h2 style="font-size: 22px; font-weight: bold; color: #333; margin: 0;">School Information</h2>
+</div>
 
-<fieldset>
-
-	<legend accesskey="I" tabindex="<?php echo tab_index(); ?>">School Information</legend>
-
-	<p>
-		<label for="schoolname" class="required">School name</label>
-		<?php
-		$value = set_value('schoolname', element('name', $settings), FALSE);
-		echo form_input(array(
-			'name' => 'schoolname',
-			'id' => 'schoolname',
-			'size' => '30',
-			'maxlength' => '255',
-			'tabindex' => tab_index(),
-			'value' => $value,
-		));
-		?>
-	</p>
-	<?php echo form_error('schoolname'); ?>
-
+<div style="display: grid; gap: 20px;">
+	<!-- <legend accesskey="I" tabindex="<?php echo tab_index();?>">School Information</legend>	 -->
+	<div style="display: grid; gap: 8px;">
+			<label for="schoolname" class="required" style="font-size: 12px; font-weight: 600; color: #444;">School name</label>
+			<?php
+				$value = set_value('schoolname', element('name', $settings), FALSE);
+				echo form_input(array(
+					'name' => 'schoolname',
+					'id' => 'schoolname',
+					'size' => '30',
+					'maxlength' => '255',
+					'tabindex' =>tab_index(),
+					'value' => $value,
+					'disabled' => true,
+					'readonly'=> true,
+					'style' => 'width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; box-sizing: border-box; outline: none; transition: border-color 0.3s;'
+				));
+				?>
+			<?php echo form_error('schoolname'); ?>
+	</div>
+<!-- 
 	<p>
 		<label for="website">Website address</label>
 		<?php
@@ -38,13 +48,13 @@ echo form_open_multipart(current_url(), array('id'=>'schooldetails', 'class'=>'c
 		));
 		?>
 	</p>
-	<?php echo form_error('website'); ?>
+	<?php echo form_error('website'); ?> -->
 
-</fieldset>
+</div>
 
 
 
-<fieldset>
+<!-- <fieldset>
 
 	<legend accesskey="L" tabindex="<?php echo tab_index() ?>">School Logo</legend>
 
@@ -98,14 +108,14 @@ echo form_open_multipart(current_url(), array('id'=>'schooldetails', 'class'=>'c
 		<p class="hint">Tick this box to <span>delete the current logo</span>. If you are uploading a new logo this will be done automatically.</p>
 	</p>
 
-</fieldset>
+</fieldset> -->
 
 
 <?php
 
-$this->load->view('partials/submit', array(
-	'submit' => array('Save', tab_index()),
-	'cancel' => array('Cancel', tab_index(), 'controlpanel'),
-));
+// $this->load->view('partials/submit', array(
+// 	'submit' => array('Save', tab_index()),
+// 	'cancel' => array('Cancel', tab_index(), 'controlpanel'),
+// ));
 
 echo form_close();

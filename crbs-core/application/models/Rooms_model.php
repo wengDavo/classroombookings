@@ -262,8 +262,8 @@ class Rooms_model extends CI_Model
 
 	public function room_info($room)
 	{
-		if ( ! is_object($room)) {
-			$room = $this->get_by_id( (int) $room);
+		if (!is_object($room)) {
+			$room = $this->get_by_id((int) $room);
 		}
 
 		$fields = $this->GetFields();
@@ -274,11 +274,10 @@ class Rooms_model extends CI_Model
 		if (feature('room_groups') && $room->room_group_id) {
 			$info[] = [
 				'name' => 'group',
-				'label' => 'Group',
+				'label' => 'Room Group',
 				'value' => html_escape($room->group->name),
 			];
 		}
-
 
 		if ($room->location) {
 			$info[] = [
@@ -288,8 +287,7 @@ class Rooms_model extends CI_Model
 			];
 		}
 
-		// User
-		if ( ! empty($room->user_id)) {
+		if (!empty($room->user_id)) {
 			$info[] = [
 				'name' => 'teacher',
 				'label' => 'Teacher',
@@ -305,18 +303,26 @@ class Rooms_model extends CI_Model
 			];
 		}
 
+		// Add room capacity
+		if (isset($room->capacity)) {
+			$info[] = [
+				'name' => 'capacity',
+				'label' => 'Capacity',
+				'value' => html_escape($room->capacity === 0 ? 'Unlimited' : $room->capacity),
+			];
+		}
+
 		if (empty($fields)) {
 			return $info;
 		}
 
 		foreach ($fields as $field) {
-
 			$field_value = NULL;
 
 			switch ($field->type) {
 				case 'TEXT':
 					$field_value = html_escape($field_values[$field->field_id]);
-				break;
+					break;
 
 				case 'CHECKBOX':
 					$val = boolval($field_values[$field->field_id]);
@@ -328,7 +334,7 @@ class Rooms_model extends CI_Model
 						$alt = 'No';
 					}
 					$field_value = "<img src='{$img_src}' alt='{$alt}' up-tooltip='{$alt}' width='16' height='16'>";
-				break;
+					break;
 
 				case 'SELECT':
 					foreach ($field->options as $option) {
@@ -337,7 +343,7 @@ class Rooms_model extends CI_Model
 							break;
 						}
 					}
-				break;
+					break;
 			}
 
 			$info[] = [
@@ -345,14 +351,10 @@ class Rooms_model extends CI_Model
 				'label' => $field->name,
 				'value' => $field_value,
 			];
-
 		}
 
 		return $info;
 	}
-
-
-
 
 	/**
 	 * Gets all information on the room - joins all the fields as well
@@ -361,9 +363,6 @@ class Rooms_model extends CI_Model
 	function GetInfo($room_id)
 	{
 		$data = array();
-
-		// Query for room
-		//
 
 		$this->db->select(array(
 			'rooms.*',

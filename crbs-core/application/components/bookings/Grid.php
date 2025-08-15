@@ -41,6 +41,7 @@ class Grid
 			'access_control_model',
 			'periods_model',
 			'weeks_model',
+			'department_classes_model'
 		]);
 
 		$this->context = $context;

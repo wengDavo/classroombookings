@@ -1,72 +1,61 @@
 <?php
-
+// Display flashdata message with green success styling
 $messages = $this->session->flashdata('saved');
-echo "<div class='messages'>{$messages}</div>";
+if (!empty($messages)) {
+    echo "<div style='background-color: #e6ffe6; color: #006600; padding: 12px; border: 1px solid #99ff99; border-radius: 5px; margin-bottom: 20px; font-size: 14px;'>{$messages}</div>";
+}
 
+// Iconbar with styled "Add Week" button
 echo iconbar([
-	array('weeks/add', 'Add Week', 'add.png'),
-]);
+    array('weeks/add', 'Add Week', 'add.png'),
+], 'style="display: inline-block; padding: 10px 20px; background-color: #1A3C5E; color: #ffffff; text-decoration: none; border-radius: 5px; font-size: 14px; font-weight: 600; transition: background-color 0.3s;"');
 
+// Sort columns array (unused in styling but kept for functionality)
 $sort_cols = ["Name", "Colour", "None"];
-
 ?>
 
-<table
-	width="100%"
-	cellpadding="4"
-	cellspacing="2"
-	border="0"
-	class="zebra-table sort-table"
-	id="jsst-weeks"
-	up-data='<?= json_encode($sort_cols) ?>'
->
-	<col /><col /><col />
+<table style="width: 100%; border-collapse: collapse; margin: 20px 0; background-color: #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-radius: 8px; font-family: Arial, sans-serif;">
+    <col style="width: 5%;" /><col style="width: 85%;" /><col style="width: 10%;" />
 
-	<thead>
-		<tr class="heading">
-			<td class="h" width="5%" title="Colour"></td>
-			<td class="h" width="85%" title="Name">Name</td>
-			<!-- <td class="h" title="Colour">Colour</td> -->
-			<td class="n" width="10%" title="X">&nbsp;</td>
-		</tr>
-	</thead>
+    <thead>
+        <tr style="background-color: #f5f5f5; color: #333; font-weight: 600; font-size: 14px; text-transform: uppercase;">
+            <th style="padding: 14px; text-align: center; border-bottom: 2px solid #ddd;" title="Colour"></th>
+            <th style="padding: 14px; text-align: left; border-bottom: 2px solid #ddd;" title="Name">Name</th>
+            <th style="padding: 14px; text-align: center; border-bottom: 2px solid #ddd;" title="X"> </th>
+        </tr>
+    </thead>
 
-	<?php if (empty($weeks)): ?>
+    <?php if (empty($weeks)): ?>
 
-	<tbody>
-		<tr>
-			<td colspan="4" align="center" style="padding:16px 0; color: #666">No weeks.</td>
-		</tr>
-	</tbody>
+    <tbody>
+        <tr>
+            <td colspan="3" style="padding: 20px 0; font-size: 14px; color: #888; text-align: center; border-bottom: 1px solid #eee;">No weeks.</td>
+        </tr>
+    </tbody>
 
-	<?php else: ?>
+    <?php else: ?>
 
-	<tbody>
-		<?php
+    <tbody>
+        <?php
+        foreach ($weeks as $week) {
+            echo "<tr style='border-bottom: 1px solid #eee;'>";
 
-		foreach ($weeks as $week) {
+            $dot = week_dot($week);
+            echo "<td style='padding: 14px; text-align: center; font-size: 14px; color: #444;'>{$dot}</td>";
 
-			echo "<tr>";
+            $name = html_escape($week->name);
+            echo "<td style='padding: 14px; font-size: 14px; color: #1A3C5E; font-weight: 600;'>{$name}</td>";
 
-			$dot = week_dot($week);
-			echo "<td style='text-align:center'>{$dot}</td>";
+            echo "<td style='padding: 14px; text-align: center; font-size: 14px; color: #444;'>";
+            $actions['edit'] = 'weeks/edit/' . $week->week_id;
+            $actions['delete'] = 'weeks/delete/' . $week->week_id;
+            $this->load->view('partials/editdelete', $actions);
+            echo "</td>";
 
-			$name = html_escape($week->name);
-			echo "<td>{$name}</td>";
+            echo "</tr>";
+        }
+        ?>
+    </tbody>
 
-			echo "<td>";
-			$actions['edit'] = 'weeks/edit/'.$week->week_id;
-			$actions['delete'] = 'weeks/delete/'.$week->week_id;
-			$this->load->view('partials/editdelete', $actions);
-			echo "</td>";
-
-			echo "</tr>";
-
-		}
-
-		?>
-	</tbody>
-
-	<?php endif; ?>
-
+    <?php endif; ?>
 </table>

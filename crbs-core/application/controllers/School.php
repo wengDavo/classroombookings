@@ -23,7 +23,7 @@ class School extends MY_Controller
 	public function index()
 	{
 		$this->data['settings'] = $this->settings_model->get_all('crbs');
-		$this->data['title'] = 'School Information';
+		// $this->data['title'] = 'School Information';
 		$this->data['showtitle'] = $this->data['title'];
 
 		if ($this->input->post()) {

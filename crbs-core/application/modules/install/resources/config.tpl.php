@@ -5,7 +5,7 @@ return array(
 
 	'config' => array(
 		'base_url' => '{base_url}',
-		'log_threshold' => 1,
+		'log_threshold' => 2,
 		'index_page' => 'index.php',
 		'uri_protocol' => 'REQUEST_URI',
 	),

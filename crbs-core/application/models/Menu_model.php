@@ -98,6 +98,29 @@ class Menu_model extends CI_Model
 			'url' => site_url('departments'),
 		];
 
+		$items[] = [
+			'label' => 'Courses',
+			'icon' => 'school_manage_departments.png',
+			'url' => site_url('courses'),
+		];
+
+		// $items[] = [
+		// 	'label' => 'Cohorts',
+		// 	'icon' => 'school_manage_departments.png',
+		// 	'url' => site_url('cohorts'),
+		// ];
+
+		$items[] = [
+			'label' => 'Classes',
+			'icon' => 'school_manage_departments.png',
+			'url' => site_url('department_classes'),
+		];
+
+		$items[] = [
+			'label' => 'Groups',
+			'icon' => 'school_manage_departments.png',
+			'url' => site_url('department_groups'),
+		];
 		return $items;
 	}
 
@@ -116,17 +139,17 @@ class Menu_model extends CI_Model
 			'url' => site_url('users'),
 		];
 
-		$items[] = [
-			'label' => 'Settings',
-			'icon' => 'school_manage_settings.png',
-			'url' => site_url('settings/general'),
-		];
+		// $items[] = [
+		// 	'label' => 'Settings',
+		// 	'icon' => 'school_manage_settings.png',
+		// 	'url' => site_url('settings/general'),
+		// ];
 
-		$items[] = [
-			'label' => 'Authentication',
-			'icon' => 'lock.png',
-			'url' => site_url('settings/authentication/ldap'),
-		];
+		// $items[] = [
+		// 	'label' => 'Authentication',
+		// 	'icon' => 'lock.png',
+		// 	'url' => site_url('settings/authentication/ldap'),
+		// ];
 
 		return $items;
 	}

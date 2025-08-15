@@ -18,7 +18,7 @@ $conflict_count = 0;
 // Generate table of bookings
 //
 $this->table->set_template([
-	'table_open' => '<table class="zebra-table" style="line-height:1.3;margin-top:16px;margin-bottom:16px" width="100%" cellpadding="10" cellspacing="0" border="0">',
+	'table_open' => '<table class="zebra-table" style="line-height:1.3; margin-top:16px 0;" width="100%" cellpadding="8" cellspacing="0" border="0">',
 ]);
 $this->table->set_heading([
 	['data' => 'Date', 'width' => 250],
@@ -156,13 +156,24 @@ $attrs = [
 	'up-layer' => 'any',
 ];
 
+// $hidden = [
+// 	'room_id' => $room->room_id,
+// 	'period_id' => $period->period_id,
+// 	'department_id' => set_value('department_id'),
+// 	'user_id' => set_value('user_id'),
+// 	'notes' => set_value('notes'),
+// 	'date' => set_value('date'),
+// ];
+
 $hidden = [
-	'room_id' => $room->room_id,
-	'period_id' => $period->period_id,
-	'department_id' => set_value('department_id'),
-	'user_id' => set_value('user_id'),
-	'notes' => set_value('notes'),
-	'date' => set_value('date'),
+    'room_id' => $room->room_id,
+    'period_id' => $period->period_id,
+    // 'department_id' => set_value('department_id'),
+    'user_id' => set_value('user_id'),
+    'notes' => set_value('notes'),
+    'date' => set_value('date'),
+    'course_id' => set_value('course_id', $course ? $course->course_id : NULL), // Assuming $course is available
+    'department_group_id' => set_value('department_group_id', $department_group ? $department_group->department_group_id : NULL), // Assuming $department_group is available
 ];
 
 echo form_open(current_url(), $attrs, $hidden);

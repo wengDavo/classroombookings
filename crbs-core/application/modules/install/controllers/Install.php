@@ -49,7 +49,7 @@ class Install extends MY_Controller
 			|| $_SESSION['install_complete'] == 1
 			)
 		) {
-			$this->session->set_flashdata('saved', msgbox("info", "Classroombookings is already installed."));
+			$this->session->set_flashdata('saved', msgbox("info", "catssoombookings is already installed."));
 			return redirect('');
 		}
 
@@ -181,7 +181,7 @@ class Install extends MY_Controller
 
 		}
 
-		$this->data['title'] = 'Install classroombookings - Configuration';
+		$this->data['title'] = 'Installation & Configuration';
 		$this->data['showtitle'] = $this->data['title'];
 
 		$columns = array(
@@ -232,7 +232,7 @@ class Install extends MY_Controller
 			}
 		}
 
-		$this->data['title'] = 'Install classroombookings - Information';
+		$this->data['title'] = 'Install catssoombookings - Information';
 		$this->data['showtitle'] = $this->data['title'];
 
 		$columns = array(
@@ -288,7 +288,7 @@ class Install extends MY_Controller
 
 		$this->data['requirements'] = $_SESSION['requirements'];
 
-		$this->data['title'] = 'Install classroombookings - Check requirements';
+		$this->data['title'] = 'Install catssoombookings - Check requirements';
 		$this->data['showtitle'] = $this->data['title'];
 		$this->data['body'] = $this->load->view('install/check', $this->data, TRUE);
 
@@ -307,7 +307,7 @@ class Install extends MY_Controller
 		$this->load->database();
 		$this->load->library('userauth');
 
-		$this->data['title'] = 'Install classroombookings';
+		$this->data['title'] = 'Install catssoombookings';
 		$this->data['showtitle'] = $this->data['title'];
 		$this->data['body'] = $this->load->view('install/complete', $this->data, TRUE);
 

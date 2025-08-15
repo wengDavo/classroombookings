@@ -28,7 +28,7 @@ class Table
 	{
 		$this->CI =& get_instance();
 		$this->context = $context;
-
+	
 		// Determine width of columns based on number of items
 		if ( ! $this->context->exception) {
 
@@ -91,7 +91,7 @@ class Table
 		$header_row = $this->render_header_row();
 		$content_rows = $this->render_content_rows();
 
-		// Run the content rows through the parser to populate the slots
+		// Run the content rows through the parser to populat]e the slots
 		$content_rows = $this->parse_slots($content_rows);
 
 		$tbody = '<tbody>' . $header_row . $content_rows . '</tbody>';

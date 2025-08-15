@@ -204,6 +204,7 @@ class Context
 			'schedules_model',
 			'periods_model',
 			'weeks_model',
+			
 		]);
 	}
 

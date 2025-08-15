@@ -26,8 +26,8 @@ class Room_groups extends MY_Controller
 			 	? ['room_groups', 'Groups', 'folder.png']
 			 	: null
 			 	,
-			['rooms/fields', 'Custom Fields', 'room_fields.png'],
-			['access_control', 'Access Control', 'key.png'],
+			// ['rooms/fields', 'Custom Fields', 'room_fields.png'],
+			// ['access_control', 'Access Control', 'key.png'],
 		];
 	}
 

@@ -35,7 +35,7 @@ class Profile extends MY_Controller
 			),
 		);
 
-		$this->data['title'] = 'Edit my details';
+		// $this->data['title'] = 'Edit my details';
 		$this->data['showtitle'] = $this->data['title'];
 		$this->data['body'] = $this->load->view('columns', $columns, TRUE);
 

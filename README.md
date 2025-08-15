@@ -1,29 +1,28 @@
-# classroombookings - open source room booking system for schools.
+# ClassroomBookings (Enhanced Timetable Generation)
 
-By Craig A Rodway.
+**Note:** This is an enhanced fork of the original open-source project by Craig A. Rodway. This version introduces a powerful automated timetable generation system and other significant features.
 
-[![License: AGPLv3](https://img.shields.io/static/v1?label=License&message=AGPLv3&color=3DA639&style=flat-square)](https://www.gnu.org/licenses/agpl-3.0.html)
-[![Twitter Follow](https://img.shields.io/twitter/follow/crbsapp.svg?style=social)](https://twitter.com/crbsapp)
+## About This Project
 
-This is a web-based room booking system for schools and is designed to be as easy to use as possible. Set up your bookable rooms, day schedule and timetable for the year. Add user accounts, and allow them to make and manage bookings from anywhere.
+The original project provided an excellent system for booking school rooms. This fork transforms it into a full-fledged academic scheduler by adding a core module for automatically generating complex, conflict-free timetables for an entire session.
 
-It is available to [download and install yourself](https://www.classroombookings.com/self-host/) or there is a great value [hosted service](https://www.classroombookings.com/pricing/).
+---
 
-It is web-based - PHP and MySQL - and currently uses the [CodeIgniter 3](https://codeigniter.com/) framework.
+## My Key Contributions & Features
 
-## Documentation
-For installation instructions and configuration guide, please [read the documentation pages](https://www.classroombookings.com/docs/).
+### 1. Automated Timetable Generation
+I engineered a new system capable of generating a complete academic timetable automatically. This core feature considers all specified constraints to create an optimal schedule, drastically reducing the manual effort required by school administrators.
 
-## Bug Reports & Feature Requests
-Please check out [GitHub Issues](https://github.com/craigrodway/classroombookings/issues) to view existing issues or open a new bug report.
+### 2. Sophisticated Conflict Resolution
+At the heart of the generator is a custom-built algorithm that prevents all common scheduling conflicts. The system ensures that:
+- A lecturer is never assigned to two different venues at the same time.
+- A student group is never scheduled for two different classes simultaneously.
+- A single room is not booked for two different classes at the same time.
 
-## Security
-To report any security issues, please email craig@classroombookings.com instead of using the issue tracker.
+### 3. Comprehensive Resource Management
+To power the generator, I built the back-end systems to manage all necessary academic resources, including:
+- **Courses:** Adding and managing the list of available courses.
+- **Student Groups:** Defining student groups to assign them to specific classes.
+- **Rooms & Venues:** Managing a list of available rooms with their capacities and features.
 
-## Credits
-
-This project makes use of several third parties, some of which are listed below.
-
-- [CodeIgniter](https://codeigniter.com/) (MIT)
-- [Unpoly](https://unpoly.com/) (MIT)
-- [FamFamFam Silk Icons](http://www.famfamfam.com/lab/icons/silk/) ([CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), Unmodified)
+### So much more ...

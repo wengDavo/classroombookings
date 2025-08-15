@@ -1,5 +1,8 @@
 <?php
 
+// third form container - preview/tab_item
+// 						- preview/tab_detail
+
 use app\components\TabPane;
 
 // Date format of bookings
@@ -13,36 +16,29 @@ $tabs->set_list_view('bookings/create/multi/preview/tab_item');
 $tabs->set_detail_view('bookings/create/multi/preview/tab_detail');
 
 foreach ($multibooking->slots as $key => $slot) {
-
-	$tabs->add([
-		'multibooking' => $multibooking,
-		'key' => $key,
-		'slot' => $slot,
-	]);
-
+    $tabs->add([
+        'multibooking' => $multibooking,
+        'key' => $key,
+        'slot' => $slot
+    ]);
 }
 
-// echo json_encode($multibooking, JSON_PRETTY_PRINT);
-
-
 // Form
-//
-
 $attrs = [
-	'id' => 'bookings_create_multi_recurring_preview',
-	'class' => 'cssform',
-	'up-accept-location' => 'bookings',
-	'up-layer' => 'any',
-	'up-target' => '.bookings-create',
+    'id' => 'bookings_create_multi_recurring_preview',
+    'class' => 'cssform',
+    'up-accept-location' => 'bookings',
+    'up-layer' => 'any',
+    'up-target' => '.bookings-create',
 ];
 
 $hidden = [
-	'mb_id' => $mb_id,
-	'step' => 'recurring_preview',
+    'mb_id' => $mb_id,
+    'step' => 'recurring_preview',
 ];
 
 if ($message) {
-	echo msgbox('error', $message);
+    echo msgbox('error', $message);
 }
 
 echo validation_errors();
@@ -53,14 +49,12 @@ echo "<div style='margin-bottom:16px'>Use this page to check all the booking ins
 
 echo $tabs->render();
 
-// Footer (submit or canceL)
-//
-
+// Footer (submit or cancel)
 $cancel = anchor($return_uri, 'Cancel', ['up-dismiss' => '']);
 
 $submit = form_button([
-	'type' => 'submit',
-	'content' => 'Create recurring bookings',
+    'type' => 'submit',
+    'content' => 'Create recurring bookings',
 ]);
 
 echo "<div style='border-top:0px;'>{$submit} &nbsp; {$cancel}</div>";

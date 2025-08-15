@@ -39,7 +39,7 @@ class Login extends MY_Controller
 
 		$columns['c2']['content'] = $logo_html;
 
-		$title = "<h2>Log in</h2>";
+		// $title = "<h2>Log in</h2>";
 		$body = $this->load->view('columns', $columns, TRUE);
 
 		$this->data['body'] = $title . $body;

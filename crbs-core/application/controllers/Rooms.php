@@ -36,8 +36,8 @@ class Rooms extends MY_Controller
 			 	? ['room_groups', 'Groups', 'folder.png']
 			 	: null
 			 	,
-			['rooms/fields', 'Custom Fields', 'room_fields.png'],
-			['access_control', 'Access Control', 'key.png'],
+				// ['rooms/fields', 'Custom Fields', 'room_fields.png'],
+				// ['access_control', 'Access Control', 'key.png'],
 		];
 	}
 
@@ -272,6 +272,7 @@ class Rooms extends MY_Controller
 		$this->form_validation->set_rules('location', 'Location', 'max_length[40]');
 		$this->form_validation->set_rules('notes', 'Notes', 'max_length[255]');
 		$this->form_validation->set_rules('bookable', 'Bookable', 'integer');
+		$this->form_validation->set_rules('capacity', 'Capacity', 'required|integer|greater_than_equal_to[0]|less_than_equal_to[1000]');
 
 		if ($this->form_validation->run() == FALSE) {
 			return (empty($room_id) ? $this->add() : $this->edit($room_id));
@@ -284,10 +285,10 @@ class Rooms extends MY_Controller
 			'notes' => $this->input->post('notes'),
 			'bookable' => $this->input->post('bookable'),
 			'room_group_id' => $this->input->post('room_group_id') ? $this->input->post('room_group_id') : NULL,
+			'capacity' => $this->input->post('capacity'), // Added capacity
 		);
 
 		if (empty($room_id)) {
-
 			$room_id = $this->rooms_model->insert($room_data);
 
 			if ($room_id) {
@@ -297,9 +298,7 @@ class Rooms extends MY_Controller
 				$line = sprintf($this->lang->line('crbs_action_dberror'), 'adding');
 				$flashmsg = msgbox('error', $line);
 			}
-
 		} else {
-
 			if ($this->rooms_model->update($room_id, $room_data)) {
 				$line = sprintf($this->lang->line('crbs_action_saved'), $room_data['name']);
 				$flashmsg = msgbox('info', $line);
@@ -307,28 +306,25 @@ class Rooms extends MY_Controller
 				$line = sprintf($this->lang->line('crbs_action_dberror'), 'editing');
 				$flashmsg = msgbox('error', $line);
 			}
-
 		}
 
 		$this->session->set_flashdata('saved', $flashmsg);
 
 		// Process image things
-		//
 		$image_status = $this->process_image($room_id);
-		if ( ! $image_status) {
+		if (!$image_status) {
 			return (empty($room_id) ? $this->add() : $this->edit($room_id));
 		}
 
 		// Process field-related things
-		//
 		$fields_status = $this->process_fields($room_id);
-		if ( ! $fields_status) {
+		if (!$fields_status) {
 			return (empty($room_id) ? $this->add() : $this->edit($room_id));
 		}
 
 		$uri = 'rooms';
 		$group = $room_data['room_group_id'] ?? null;
-		if ( ! empty($group)) {
+		if (!empty($group)) {
 			$uri = 'rooms?group=' . $group;
 		}
 

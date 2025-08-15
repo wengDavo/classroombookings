@@ -42,6 +42,7 @@ class Bookings extends MY_Controller
 	 * Main bookings page.
 	 *
 	 * Nearly everything handled through bookings Grid and Context components.
+	 * The first page that loads the grid
 	 *
 	 */
 	public function index()
@@ -61,6 +62,7 @@ class Bookings extends MY_Controller
 		$this->data['body'] = $message . $grid->render();
 
 		$arr = $context->toArray();
+		// data that populates the grid
 		$json = json_encode($arr, JSON_PRETTY_PRINT);
 		// $this->data['body'] .= "<pre>{$json}</pre>";
 
@@ -122,7 +124,8 @@ class Bookings extends MY_Controller
 			'room',
 			'user',
 			'department',
-			'repeat',
+			'department_group',
+			'course'
 		];
 
 		$booking = $this->bookings_model->include($include)->get($booking_id);
@@ -446,7 +449,5 @@ class Bookings extends MY_Controller
 		$return_uri = 'bookings?' . $params;
 		return redirect($return_uri);
 	}
-
-
 
 }

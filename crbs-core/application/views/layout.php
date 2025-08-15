@@ -8,25 +8,6 @@ $enable_doorbell = $this->userauth->is_level(ADMINISTRATOR) && !is_demo_mode();
 $global_menu = $this->menu_model->global();
 $footer_menu = $global_menu;
 
-if ($enable_onset_link) {
-	$footer_menu[] = [
-		'label' => 'Changelog',
-		'url' => config_item('onset_public_url'),
-		'icon' => 'bell.png',
-		'ext' => true,
-	];
-}
-
-if ($enable_doorbell) {
-	$footer_menu[] = [
-		'label' => 'Feedback',
-		'url' => '#',
-		'icon' => 'comment.png',
-		'id' => 'feedback_link',
-		'attrs' => 'style="opacity:0.3;pointer-events:none"',
-	];
-}
-
 $css = [
 	'screen' => (ENVIRONMENT === 'development' ? 'assets/css/main.css' : 'assets/css/main.min.css'),
 	'print' => (ENVIRONMENT === 'development' ? 'assets/css/print.css' : 'assets/css/print.min.css'),
@@ -40,7 +21,7 @@ $css = [
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="author" content="Craig A Rodway">
-	<title><?= html_escape($title) ?> | classroombookings</title>
+	<title><?= html_escape($title) ?></title>
 	<?php
 	if (CRBS_MANAGED && setting('logo')) {
 		echo "<link rel='preconnect' href='https://crbsappimg.b-cdn.net'>";
@@ -69,7 +50,7 @@ $css = [
 	if (setting('maintenance_mode') == 1) {
 		$message = setting('maintenance_mode_message');
 		if (empty($message)) {
-			$message = 'classroombookings is currently in maintenance mode. Please check again soon.';
+			$message = 'catss is currently in maintenance mode. Please check again soon.';
 		}
 		echo "<div class='maintenance-wrapper'>";
 		echo "<div class='outer'>";
@@ -96,8 +77,8 @@ $css = [
 						if (!empty($name)) {
 							$name = html_escape($name);
 						} else {
-							$attrs = "title='classroombookings' style='font-weight:normal;color:#0081C2;letter-spacing:-2px'";
-							$name = "classroom";
+							$attrs = "title='setup' style='font-weight:normal;color:#0081C2;letter-spacing:-2px'";
+							$name = "catss";
 							$name .= "<span style='color:#ff6400;font-weight:bold'>bookings</span>";
 						}
 						echo anchor('/', $name, $attrs);
@@ -178,15 +159,6 @@ $css = [
 								echo "&nbsp;";
 							}
 							?>
-						</div>
-					</div>
-					<div class="block b-40">
-						<div style="font-size:90%;color:#678; line-height: 2; text-align:right">
-							<span><a href="https://www.classroombookings.com/" target="_blank">classroombookings</a> version <?= VERSION ?>.
-							<br>
-							&copy; <?= date('Y') ?> Craig A Rodway.</span>
-							<br />
-							Load time: <?php echo $this->benchmark->elapsed_time() ?> seconds.
 						</div>
 					</div>
 				</div>
